@@ -1,24 +1,30 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-
 function App() {
+  const [number, setNumber] = React.useState(0);
+  const [detail, setDetail] = React.useState([{
+    "id": "181913649",
+    "name": "Drake Hotline Bling",
+    "url": "https://i.imgflip.com/30b1gx.jpg",
+    "width": 1200,
+    "height": 1200,
+    "box_count": 2
+  }]);
+  React.useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then(data => data.json())
+      .then(response => {
+        const { memes } = response.data;
+        setDetail(memes);
+      });
+  }
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>It's working perfectly fine!!</p>
+      <p>{number}</p>
+      <button onClick={() => setNumber(Math.floor(Math.random() * detail.length))}>Click me</button>
+      <p>{detail[number].url}</p>
     </div>
   );
 }
