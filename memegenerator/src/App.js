@@ -25,6 +25,7 @@ function App() {
       <p>{number}</p>
       <button onClick={() => setNumber(Math.floor(Math.random() * detail.length))}>Click me</button>
       <p>{detail[number].url}</p>
+      <img src={detail[number].url} alt=""></img>
     </div>
   );
 }
